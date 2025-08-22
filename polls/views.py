@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-
+from django.template import loader
 from .models import  Question
 
 # Create your views here.
@@ -7,9 +7,11 @@ from .models import  Question
 
 def index(req):
     latest_Questions = Question.objects.all().order_by("-pub_date")[:5]
+    template = loader.get_template("polls/index.html")
     # lets clear the output
-    output = ", ".join([q.question_text for q in latest_Questions])
-    return HttpResponse(output)
+    context = {'latest_Questions': latest_Questions}
+    # output = ", ".join([q.question_text for q in latest_Questions])
+    return HttpResponse(template.render(context,req))
 
 
 
