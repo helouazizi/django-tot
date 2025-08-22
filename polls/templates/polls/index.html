@@ -1,9 +1,9 @@
 {% if latest_Questions %}
 <ul>
     {% for question in latest_Questions %}
-    <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
 </ul>
-{% else %}
+{% else %}p
 <p>No polls are available.</p>
 {% endif %}
